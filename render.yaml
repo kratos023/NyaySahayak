@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: nyayshakti-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: BHASHINI_API_KEY
+        sync: false
+      - key: BHASHINI_USER_ID
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        value: admin@nyayshakti.com
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: nyayshakti-db
+      mountPath: /data
+      sizeGB: 1
